@@ -29,10 +29,10 @@ public class Barberia extends javax.swing.JFrame {
     boolean barbero_durmiendo = false;
     JLabel sillas[] = new JLabel[20];
     
-    ImageIcon iconosilla = new ImageIcon("silla.png");
+    ImageIcon iconosilla = new ImageIcon(getClass().getClassLoader().getResource("barbero/silla.png"));
     Image iconoescalados = this.iconosilla.getImage().getScaledInstance(50, 100, Image.SCALE_SMOOTH);
     Icon iconosilla_g = new ImageIcon(iconoescalados);
-    ImageIcon iconosentado = new ImageIcon("sentado.png");
+    ImageIcon iconosentado = new ImageIcon(getClass().getClassLoader().getResource("barbero/sentado.png"));
     Image iconoescaladose = this.iconosentado.getImage().getScaledInstance(50, 100, Image.SCALE_SMOOTH);
     Icon iconosentado_l = new ImageIcon(iconoescaladose);
     
@@ -46,7 +46,7 @@ public class Barberia extends javax.swing.JFrame {
     /** Creates new form Barberia */
     public Barberia() {
         initComponents();
-        ImageIcon icono = new ImageIcon("barbero.png");
+        ImageIcon icono = new ImageIcon(getClass().getClassLoader().getResource("barbero/barbero.png"));
         Image iconoescalado = icono.getImage().getScaledInstance(this.jLabel1.getWidth(), this.jLabel1.getHeight(), Image.SCALE_SMOOTH);
         Icon iconobarbero = new ImageIcon(iconoescalado);
         this.jLabel1.setIcon(iconobarbero);
