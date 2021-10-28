@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.beans.value.ObservableValue;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -36,6 +37,13 @@ public class Ventana extends javax.swing.JFrame {
     int cajasgrandesingresadas = 0;
     int cajaspequeñasretiradas = 0;
     int cajasgrandesretiradas = 0;
+    
+    ImageIcon caja = new ImageIcon(getClass().getClassLoader().getResource("acopio/box.png"));
+    ImageIcon cajag = new ImageIcon(getClass().getClassLoader().getResource("acopio/box1.png"));
+    ImageIcon cajag1 = new ImageIcon(getClass().getClassLoader().getResource("acopio/box2.png"));
+    ImageIcon entrega = new ImageIcon(getClass().getClassLoader().getResource("acopio/delivery.png"));
+    ImageIcon entregag = new ImageIcon(getClass().getClassLoader().getResource("acopio/delivery1.png"));
+    ImageIcon entregag1 = new ImageIcon(getClass().getClassLoader().getResource("acopio/delivery2.png"));
     
     /** Creates new form Ventana */
     public Ventana() {
@@ -563,25 +571,30 @@ public class Ventana extends javax.swing.JFrame {
 
     public void actualizarlabel(int indice, boolean productor){
         if(productor){
-            this.estanteria[indice].setIcon(new javax.swing.ImageIcon("box.png"));
+            this.estanteria[indice].setIcon(this.caja);
+            this.espaciosocupados++;
+            this.cajaspequeñasingresadas++;
+            System.out.println(this.espaciosocupados);
             try{
                 Thread.sleep(100);
             }catch(Exception e){
                 
             }
-            this.espaciosocupados++;
-            this.cajaspequeñasingresadas++;
+            
             for(int i = 0; i < this.lista_productos.get_lista().size(); i++){
                 if(this.lista_productos.get_lista().get(i).compareTo("p") == 0){
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box.png"));
+                    this.estanteria[i].setIcon(this.caja);
                 }else{
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box1.png"));
-                    this.estanteria[i+1].setIcon(new javax.swing.ImageIcon("box2.png"));
+                    this.estanteria[i].setIcon(this.cajag);
+                    this.estanteria[i+1].setIcon(this.cajag1);
                     i = i+1;
                 }
             }
         }else{
-            this.estanteria[indice].setIcon(new javax.swing.ImageIcon("delivery.png"));
+            this.estanteria[indice].setIcon(this.entrega);
+            this.espaciosocupados--;
+            this.cajaspequeñasretiradas++;
+            System.out.println(this.espaciosocupados);
             try{
                 Thread.sleep(100);
             }catch(Exception e){
@@ -589,15 +602,14 @@ public class Ventana extends javax.swing.JFrame {
             }
             for(int i = 0; i < this.lista_productos.get_lista().size(); i++){
                 if(this.lista_productos.get_lista().get(i).compareTo("p") == 0){
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box.png"));
+                    this.estanteria[i].setIcon(this.caja);
                 }else{
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box1.png"));
-                    this.estanteria[i+1].setIcon(new javax.swing.ImageIcon("box2.png"));
+                    this.estanteria[i].setIcon(this.cajag);
+                    this.estanteria[i+1].setIcon(this.cajag1);
                     i = i+1;
                 }
             }
-            this.espaciosocupados--;
-            this.cajaspequeñasretiradas++;
+            
         }
         this.jLabel22.setText(String.valueOf(this.espaciosocupados));
         this.jLabel24.setText(String.valueOf(this.cajaspequeñasingresadas));
@@ -607,21 +619,22 @@ public class Ventana extends javax.swing.JFrame {
     
     public void actualizarlabel_bb(int indice_inicio, int indice_fin, boolean productor){
         if(productor){
-            this.estanteria[indice_inicio].setIcon(new javax.swing.ImageIcon("box1.png"));
-            this.estanteria[indice_fin].setIcon(new javax.swing.ImageIcon("box2.png"));
+            this.estanteria[indice_inicio].setIcon(this.cajag);
+            this.estanteria[indice_fin].setIcon(this.cajag1);
             try{
                 Thread.sleep(100);
             }catch(Exception e){
                 
             }
             this.espaciosocupados += 2;
+            System.out.println(this.espaciosocupados);
             this.cajasgrandesingresadas++;
             for(int i = 0; i < this.lista_productos.get_lista().size(); i++){
                 if(this.lista_productos.get_lista().get(i).compareTo("p") == 0){
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box.png"));
+                    this.estanteria[i].setIcon(this.caja);
                 }else{
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box1.png"));
-                    this.estanteria[i+1].setIcon(new javax.swing.ImageIcon("box2.png"));
+                    this.estanteria[i].setIcon(this.cajag);
+                    this.estanteria[i+1].setIcon(this.cajag1);
                     i = i+1;
                 }
             }
@@ -629,8 +642,8 @@ public class Ventana extends javax.swing.JFrame {
                 this.estanteria[i].setIcon(null);
             }
         }else{
-            this.estanteria[indice_inicio].setIcon(new javax.swing.ImageIcon("delivery1.png"));
-            this.estanteria[indice_fin].setIcon(new javax.swing.ImageIcon("delivery2.png"));
+            this.estanteria[indice_inicio].setIcon(this.entregag);
+            this.estanteria[indice_fin].setIcon(this.entregag1);
             try{
                 Thread.sleep(100);
             }catch(Exception e){
@@ -638,10 +651,10 @@ public class Ventana extends javax.swing.JFrame {
             }
             for(int i = 0; i < this.lista_productos.get_lista().size(); i++){
                 if(this.lista_productos.get_lista().get(i).compareTo("p") == 0){
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box.png"));
+                    this.estanteria[i].setIcon(this.caja);
                 }else{
-                    this.estanteria[i].setIcon(new javax.swing.ImageIcon("box1.png"));
-                    this.estanteria[i+1].setIcon(new javax.swing.ImageIcon("box2.png"));
+                    this.estanteria[i].setIcon(this.cajag);
+                    this.estanteria[i+1].setIcon(this.cajag1);
                     i = i+1;
                 }
             }
@@ -650,6 +663,7 @@ public class Ventana extends javax.swing.JFrame {
             }
             this.espaciosocupados -= 2;
             this.cajasgrandesretiradas++;
+            System.out.println(this.espaciosocupados);
         }
         this.jLabel22.setText(String.valueOf(this.espaciosocupados));
         this.jLabel26.setText(String.valueOf(this.cajasgrandesingresadas));
